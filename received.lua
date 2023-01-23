@@ -3,6 +3,7 @@ hostname = "gen1"
 protocol = "im_gen"
 
 rednet.host( protocol, hostname)
+rednet.open("left")
 while true do
     local id,message = rednet.receive()
 
