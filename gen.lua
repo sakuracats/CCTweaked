@@ -37,3 +37,4 @@ name = message[1]
 msg = message[2]
 gen(m,co,name,msg)
 end
+end
