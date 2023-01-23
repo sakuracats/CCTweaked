@@ -23,8 +23,6 @@ end
 
 while true do
 local id,message = rednet.receive()
-local gen = message[0]
-local msg = message[1]
-local co = message[2]
-gen(m,line,gen,msg)
+print(message)
+gen(m,co,gen,msg)
 end
