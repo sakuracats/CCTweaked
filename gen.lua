@@ -8,7 +8,8 @@ row = height/10
 col = width/2
 jump = 2
 
-rednet.host( "monitor", "monitor1" )
+rednet.open("front")
+rednet.host( "monitor", "monitor1")
 
 
 function gen(m,co,gen,msg)
