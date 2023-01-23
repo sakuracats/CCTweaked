@@ -32,6 +32,7 @@ if not id then
 elseif not message[1] then
 elseif not message[2] then
 elseif not message[3] then
+else
 co = message[3]
 name = message[1]
 msg = message[2]
