@@ -12,17 +12,28 @@ rednet.open("front")
 rednet.host( "monitor", "monitor1")
 
 
-function gen(m,co,gen,msg)
+function gen(m,co,name,msg)
     m.setBackgroundColor(colors.black)
     m.setCursorPos(0+1,0+row*3+(co*jump))
-    m.write(gen)
+    m.write(name)
     m.setCursorPos(0+1+col,0+row*3+(co*jump))
-    m.setBackgroundColor(colors.green)
+    if msg == "Stopped" then
+        m.setBackgroundColor(colors.red)
+    elseif msg == "Running" then
+        m.setBackgroundColor(colors.green)
+    else
+    end
     m.write(msg)
 end
 
 while true do
 local id,message = rednet.receive()
-print(message)
-gen(m,co,gen,msg)
+if not id then
+elseif not message[1] then
+elseif not message[2] then
+elseif not message[3] then
+co = message[3]
+name = message[1]
+msg = message[2]
+gen(m,co,name,msg)
 end
