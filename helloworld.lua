@@ -12,8 +12,8 @@ function updateClock(m)
     for i = 0,width,col do
         for x = 0,height,row do
             m.setBackgroundColor(colors.blue)
-            m.setCursorPos(i,x)
-            m.write(i,"-",x)  
+            m.setCursorPos(i+1,x)
+            m.write(string.format(i,"-",x))  
         end
     end
 end
