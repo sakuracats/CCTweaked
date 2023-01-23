@@ -1,23 +1,29 @@
 m = peripheral.wrap("back")
-m.clear()
-m.setTextScale(1)
+m.setTextScale(2)
 m.setTextColor(colors.white)
 m.setBackgroundColor(colors.black)
+m.clear()
 width,height = m.getSize()
 row = height/10
 col = width/2
+jump = 2
 
-function gen(m)
+rednet.host( "monitor", "monitor1" )
+
+
+function gen(m,co,gen,msg)
     m.setBackgroundColor(colors.black)
-    m.setCursorPos(0+1,0+row*2)
-    m.write("gen1")
-    m.setCursorPos(0+1+col,0+row*2)
+    m.setCursorPos(0+1,0+row*3+(co*jump))
+    m.write(gen)
+    m.setCursorPos(0+1+col,0+row*3+(co*jump))
     m.setBackgroundColor(colors.green)
-    m.write("Running")
-    m.setCursorPos(0+1,0+row*3)
-    m.write("gen2")
-    m.setCursorPos(0+1+col*2,0+row*3)
-    m.setBackgroundColor(colors.red)
-    m.write("Stopped")
+    m.write(msg)
 end
-gen(m)
+
+while true do
+local id,message = rednet.receive()
+local gen = message[0]
+local msg = message[1]
+local co = message[2]
+gen(m,line,gen,msg)
+end
