@@ -1,8 +1,9 @@
-white True do
+rednet.host( "im_gen", "gen1" )
+while true do
     local id,message = rednet.receive()
-    if message == "True" then
-        rs.setOutput("back", True)
+    if message == false then
+        rs.setOutput("top", true)
     else
-        rs.setOutput("back", False)
+        rs.setOutput("top", false)
     end
 end
