@@ -9,11 +9,12 @@ while true do
 
     local running = {hostname,"Running",0}
     local stopped = {hostname,"Stopped",0}
-    if message == false then
+    if not id then
+    elseif message == false then
         rs.setOutput("top", true)
-        rednet.send(cmder,running)
-    else
-        rs.setOutput("top", false)
         rednet.send(cmder,stopped)
+    elseif message == true then
+        rs.setOutput("top", false)
+        rednet.send(cmder,running)
     end
 end
