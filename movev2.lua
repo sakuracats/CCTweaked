@@ -85,28 +85,9 @@ function DustToIron()
     nowlocation = 'iron'
 end
 
-function Holdon()
-    for i = 2, 16 do
-        count = turtle.getItemCount(i)
-        start = 2
-        if count = 0 then
-            finish = i - 1
-        for x = 2, finish do
-            if turtle.getItemCount(x) < 60 then
-            else
-                return true
-            end
-        end
-        end
-    end
-end
-
 
 function GetItem()
-    while true do
-        if Holdon() == true then
-            break
-        end
+    while turtle.suck() do
         turtle.suck()
     end
     if turtle.getItemCount(16) == 0 then
@@ -118,7 +99,7 @@ return rtn
 end
 
 function GetItemLast()
-    if select(2, turtle.suck())~="No items to take"
+    if select(2, turtle.suck())~="No items to take" then
         while turtle.getItemCount(16) == 0 do
             turtle.suck()
         end
