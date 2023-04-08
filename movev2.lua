@@ -98,7 +98,6 @@ function GetItem()
     else
         rtn = 'full'
     end
-    maxswitch = maxswitch + 1
 return rtn
 end
 
@@ -112,29 +111,24 @@ end
 
 function GoPutItem()
     if nowlocation == 'dust' then
-        print('Go To Controller')
         DustToController()
     end
     if nowlocation == 'iron' then
-        print('Go To Controller')
         IronToController()
     end
 end
 
 function Switch()
     if nowlocation == 'dust' then
-        print('Go To Iron')
         DustToIron()
     end
     if nowlocation == 'iron' then
-        print('Go To Dust')
         IronToDust()
     end
 end
 
 nowlocation = 'dust'
 print('nowlocation is Dust')
-maxswitch = 0
 while true do
 
     print(turtle.getFuelLevel())
@@ -147,8 +141,10 @@ while true do
     -- Get Item
     getitem = GetItem()
     lastchest = nowlocation
+    maxswitch = 0
     while getitem == 'notfull' do
         Switch()
+        maxswitch = maxswitch + 1
         if maxswitch < 1 then
             getitem = GetItem()
         else
