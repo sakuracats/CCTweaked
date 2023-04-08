@@ -11,6 +11,7 @@ function IronToController()
     turtle.forward()
     turtle.forward()
     nowlocation = 'controller'
+    return nowlocation
 end
 
 function ControllerToIron()
@@ -26,8 +27,9 @@ function ControllerToIron()
     turtle.forward()
     turtle.forward()
     turtle.forward()
-    turtle.turnRight()'
+    turtle.turnRight()
     nowlocation = 'iron'
+    return nowlocation
 end
 
 function DustToController()
@@ -41,6 +43,7 @@ function DustToController()
     turtle.forward()
     turtle.forward()
     nowlocation = 'controller'
+    return nowlocation
 end
 
 function ControllerToDust()
@@ -56,6 +59,7 @@ function ControllerToDust()
     turtle.forward()
     turtle.turnRight()
     nowlocation = 'dust'
+    return nowlocation
 end
 
 
@@ -65,6 +69,7 @@ function IronToDust()
     turtle.forward()
     turtle.turnLeft()
     nowlocation = 'dust'
+    return nowlocation
 end
 
 function DustToIron()
@@ -73,6 +78,7 @@ function DustToIron()
     turtle.forward()
     turtle.turnRight()
     nowlocation = 'iron'
+    return nowlocation
 end
 
 
@@ -88,6 +94,15 @@ function GetItem()
 return rtn
 end
 
+function GetItemMax()
+    while turtle.getItemCount(16) == 0 do
+        turtle.suck()
+    end
+    rtn = 'full'
+return rtn
+end
+
+
 function GoPutItem()
     if nowlocation == 'dust' then
         DustToController()
@@ -98,6 +113,7 @@ function GoPutItem()
 end
 
 function Switch()
+    maxswitch = maxswitch + 1
     if nowlocation == 'dust' then
         DustToIron()
     end
@@ -106,9 +122,10 @@ function Switch()
     end
 end
 
-
+nowlocation = 'iron'
+maxswitch = 0
 while true do
-    nowlocation = 'iron'
+
     print('nowlocation is iron')
     print(turtle.getFuelLevel())
     if turtle.getFuelLevel() < 50 then
@@ -122,7 +139,12 @@ while true do
     lastchest = nowlocation
     while getitem == 'notfull' do
         Switch()
-        getitem = GetItem()
+        if maxswitch = 0 then
+            getitem = GetItem()
+        else
+            getitem = GetItemMax()
+            maxswitch = 0
+        end
     end
 
     GoPutItem()
@@ -140,10 +162,10 @@ while true do
     
     -- Move to Chest
     if lastchest == 'iron' then
-        ControllerToIron()
+        ControllerToDust()
     end
     if lastchest == 'dust' then
-        ControllerToDust()
+        ControllerToIron()
     end
     
 end
