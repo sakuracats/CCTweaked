@@ -138,12 +138,11 @@ while true do
     getitem = GetItem()
     lastchest = nowlocation
     while getitem == 'notfull' do
-        Switch()
-        if maxswitch = 0 then
+        if maxswitch == 0 then
+            Switch()
             getitem = GetItem()
         else
             getitem = GetItemMax()
-            maxswitch = 0
         end
     end
 
@@ -159,7 +158,7 @@ while true do
     end
 
 
-    
+    maxswitch = 0
     -- Move to Chest
     if lastchest == 'iron' then
         ControllerToDust()
