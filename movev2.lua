@@ -74,8 +74,6 @@ function IronToDust()
     turtle.forward()
     turtle.turnLeft()
     nowlocation = 'dust'
-
-    return nowlocation
 end
 
 function DustToIron()
@@ -85,7 +83,6 @@ function DustToIron()
     turtle.forward()
     turtle.turnRight()
     nowlocation = 'iron'
-    return nowlocation
 end
 
 
@@ -121,9 +118,10 @@ end
 function Switch()
     if nowlocation == 'dust' then
         DustToIron()
-    end
-    if nowlocation == 'iron' then
+    elseif nowlocation == 'iron' then
         IronToDust()
+    else
+        print('Error: nowlocation is not iron or dust')
     end
 end
 
@@ -143,10 +141,10 @@ while true do
     lastchest = nowlocation
     maxswitch = 0
     while getitem == 'notfull' do
-        Switch()
         maxswitch = maxswitch + 1
         if maxswitch < 1 then
             getitem = GetItem()
+            Switch()
         else
             getitem = GetItemLast()
         end
