@@ -90,15 +90,16 @@ function Holdon()
         count = turtle.getItemCount(i)
         if count > 60 then
             return false
-        else
-            return true
         end
     end
 end
 
 
 function GetItem()
-    while Holdon() do
+    while true do
+        if Holdon() == fasle then
+            break
+        end
         turtle.suck()
     end
     if turtle.getItemCount(16) == 0 then
