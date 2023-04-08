@@ -83,20 +83,23 @@ end
 
 
 function GetItem()
-    if maxswitch == 0 then
-        while turtle.suck() do
-            turtle.suck()
-        end
-        if turtle.getItemCount(16) == 0 then
-            rtn = 'notfull'
-        else
-            rtn = 'full'
-        end
+    while turtle.suck() do
+        turtle.suck()
+    end
+    if turtle.getItemCount(16) == 0 then
+        rtn = 'notfull'
     else
-        while turtle.getItemCount(16) == 0 do
-            turtle.suck()
-        end    
         rtn = 'full'
+    end
+    maxswitch = maxswitch + 1
+return rtn
+end
+
+function GetItemLast()
+    while turtle.getItemCount(16) == 0 do
+        turtle.suck()
+    end
+    rtn = 'full'
 return rtn
 end
 
@@ -110,7 +113,6 @@ function GoPutItem()
 end
 
 function Switch()
-    maxswitch = maxswitch + 1
     if nowlocation == 'dust' then
         DustToIron()
     end
@@ -136,7 +138,11 @@ while true do
     lastchest = nowlocation
     while getitem == 'notfull' do
         Switch()
-        getitem = GetItem()
+        if maxswitch < 1 then
+            getitem = GetItem()
+        else
+            getitem = GetItemLast()
+        end
     end
 
     GoPutItem()
@@ -149,7 +155,6 @@ while true do
             a = turtle.drop()
         end
     end
-
 
     maxswitch = 0
     -- Move to Chest
