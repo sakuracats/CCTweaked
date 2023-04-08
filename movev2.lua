@@ -85,9 +85,20 @@ function DustToIron()
     nowlocation = 'iron'
 end
 
+function Holdon()
+    for i = 2, 16 do
+        count = turtle.getItemCount(i)
+        if count > 60 then
+            return false
+        else
+            return true
+        end
+    end
+end
+
 
 function GetItem()
-    while turtle.suck() do
+    while Holdon() do
         turtle.suck()
     end
     if turtle.getItemCount(16) == 0 then
@@ -128,23 +139,23 @@ end
 nowlocation = 'dust'
 print('nowlocation is Dust')
 while true do
-
+    turtle.select(1)
     print(turtle.getFuelLevel())
     if turtle.getFuelLevel() < 50 then
         turtle.refuel(1)
     end
     
-    turtle.select(1)
+    
     
     -- Get Item
     getitem = GetItem()
     lastchest = nowlocation
     maxswitch = 0
     while getitem == 'notfull' do
+        Switch()
         maxswitch = maxswitch + 1
         if maxswitch < 1 then
             getitem = GetItem()
-            Switch()
         else
             getitem = GetItemLast()
         end
