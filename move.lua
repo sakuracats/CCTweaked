@@ -1,15 +1,18 @@
-while True do
+while true do
 
+print(turtle.getFuelLevel())
 if turtle.getFuelLevel() < 50 then
     turtle.refuel(1)
 end
 
--- 取得物品
+turtle.select(1)
+
+-- Get Item
 while turtle.suck() do
     turtle.suck()
 end
 
--- 移動到Controller
+-- Move to Controller
 turtle.turnRight()
 turtle.forward()
 turtle.forward()
@@ -24,10 +27,15 @@ turtle.forward()
 
 for i = 2, 16 do
     turtle.select(i)
-    turtle.drop()
+    a = turtle.drop()
+    while a == false do
+        print('no space sleep 10 sec to retry')
+        sleep(10)
+        a = turtle.drop()
+    end
 end
 
--- 移動到木桶
+-- Move to Chest
 turtle.turnLeft()
 turtle.turnLeft()
 turtle.forward()
