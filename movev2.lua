@@ -88,8 +88,15 @@ end
 function Holdon()
     for i = 2, 16 do
         count = turtle.getItemCount(i)
-        if count > 60 then
-            return false
+        start = 2
+        if count = 0 then
+            finish = i - 1
+        for x = 2, finish do
+            if turtle.getItemCount(x) < 60 then
+            else
+                return true
+            end
+        end
         end
     end
 end
@@ -97,7 +104,7 @@ end
 
 function GetItem()
     while true do
-        if Holdon() == fasle then
+        if Holdon() == true then
             break
         end
         turtle.suck()
@@ -111,8 +118,10 @@ return rtn
 end
 
 function GetItemLast()
-    while turtle.getItemCount(16) == 0 do
-        turtle.suck()
+    if select(2, turtle.suck())~="No items to take"
+        while turtle.getItemCount(16) == 0 do
+            turtle.suck()
+        end
     end
     rtn = 'full'
 return rtn
@@ -165,11 +174,13 @@ while true do
     GoPutItem()
     for i = 2, 16 do
         turtle.select(i)
-        a = turtle.drop()
-        while a == false do
-            print('no space sleep 10 sec to retry')
-            sleep(10)
+        if turtle.getItemCount(i) ~= 0 then
             a = turtle.drop()
+            while a == false do
+                print('no space sleep 10 sec to retry')
+                sleep(10)
+                a = turtle.drop()
+            end
         end
     end
 
