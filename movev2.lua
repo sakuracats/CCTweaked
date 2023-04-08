@@ -1,4 +1,5 @@
 function IronToController()
+    print('Go To Controller')
     turtle.turnRight()
     turtle.forward()
     turtle.forward()
@@ -15,6 +16,7 @@ function IronToController()
 end
 
 function ControllerToIron()
+    print('Go To Iron')
     turtle.turnLeft()
     turtle.turnLeft()
     turtle.forward()
@@ -33,6 +35,7 @@ function ControllerToIron()
 end
 
 function DustToController()
+    print('Go To Controller')
     turtle.turnRight()
     turtle.forward()
     turtle.forward()
@@ -47,6 +50,7 @@ function DustToController()
 end
 
 function ControllerToDust()
+    print('Go To Dust')
     turtle.turnLeft()
     turtle.turnLeft()
     turtle.forward()
@@ -64,15 +68,18 @@ end
 
 
 function IronToDust()
+    print('Go To Dust')
     turtle.turnRight()
     turtle.forward()
     turtle.forward()
     turtle.turnLeft()
     nowlocation = 'dust'
+
     return nowlocation
 end
 
 function DustToIron()
+    print('Go To Iron')
     turtle.turnLeft()
     turtle.forward()
     turtle.forward()
@@ -105,27 +112,31 @@ end
 
 function GoPutItem()
     if nowlocation == 'dust' then
+        print('Go To Controller')
         DustToController()
     end
     if nowlocation == 'iron' then
+        print('Go To Controller')
         IronToController()
     end
 end
 
 function Switch()
     if nowlocation == 'dust' then
+        print('Go To Iron')
         DustToIron()
     end
     if nowlocation == 'iron' then
+        print('Go To Dust')
         IronToDust()
     end
 end
 
-nowlocation = 'iron'
+nowlocation = 'dust'
+print('nowlocation is Dust')
 maxswitch = 0
 while true do
 
-    print('nowlocation is iron')
     print(turtle.getFuelLevel())
     if turtle.getFuelLevel() < 50 then
         turtle.refuel(1)
