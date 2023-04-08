@@ -83,25 +83,22 @@ end
 
 
 function GetItem()
-    while turtle.suck() do
-        turtle.suck()
-    end
-    if turtle.getItemCount(16) == 0 then
-        rtn = 'notfull'
+    if maxswitch == 0 then
+        while turtle.suck() do
+            turtle.suck()
+        end
+        if turtle.getItemCount(16) == 0 then
+            rtn = 'notfull'
+        else
+            rtn = 'full'
+        end
     else
+        while turtle.getItemCount(16) == 0 do
+            turtle.suck()
+        end    
         rtn = 'full'
-    end
 return rtn
 end
-
-function GetItemMax()
-    while turtle.getItemCount(16) == 0 do
-        turtle.suck()
-    end
-    rtn = 'full'
-return rtn
-end
-
 
 function GoPutItem()
     if nowlocation == 'dust' then
@@ -138,12 +135,8 @@ while true do
     getitem = GetItem()
     lastchest = nowlocation
     while getitem == 'notfull' do
-        if maxswitch == 0 then
-            Switch()
-            getitem = GetItem()
-        else
-            getitem = GetItemMax()
-        end
+        Switch()
+        getitem = GetItem()
     end
 
     GoPutItem()
